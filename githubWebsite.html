@@ -1,0 +1,28 @@
+I had web content on several sites: at tux.org, at work, at various dedicated websites (instructables, hackaday, etc). Sometimes I wished I had a dedicated site for capabilities not provided by those, for instance for live content. Of course I could set up my own cloud-based server,  but then I would have to administer it and pay unpredictable amounts of fees, due to bandwidth charges etc.
+
+Recently I stumbled upon a neat trick using GitHub. It turns out that they support a web publishing from a dedicated repo. Therefore, I can automate on my personal home machine, and just push the contents to github. Voila, a secure site.
+
+I can then associate a registered domain with this github.io website. 
+ 
+Of course this method has some disadvantages: it does not support the frontend-backend active model; AFAIK, there is no way for github to run a database for you.
+
+Here's how this works: first I register a domain klosowski.us which I will point to the website hosted on github. I used a British registrar Porkbun
+
+Next, I used my github account to create a repo under github.com/przemekklosowski/przemekklosowski.github.io. Of course I am going to use ssh connection by uploading my id_rsa.pub on github.
+The repo creation sets up some skeleton files, which I cloned to my desktop via SSH, edited and pushed back to github:
+
+        git clone git@github.com:przemekklosowski/przemekklosowski.github.io
+        cd przemekklosowski.github.io
+        echo "Hello World" > index.html
+        git add --all
+        git commit -m "Initial commit"
+        git push -u origin main
+
+Shortly after that, a website appeared on przemekklosowski.github.io.
+
+Next I configured repo Settings/ external domain as klosowski.us.
+
+I went with Porkbun to register klosowski.us for $2.50 first year, $7.50/year for 2 more years. I used their Quick Connect option for Github: just needed to give them my id przemekklosowski
+
+Now, I can update the website by editing local copy and 'git push -u origin main' or even 'git push'.
+
